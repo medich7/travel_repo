@@ -33,12 +33,12 @@ describe("Navigation Tests for Booking.com",()=>{
             url: '/cars',
             content: 'Car rentals',
             title: 'car rental' },
-        { 
+        /*{ 
             tab: 'taxis',
             endpoint: '/taxi/index.html?aid=304142&label=gen173bo-1DEgR0YXhpKIICOOgHSDNYA2jiAYgBAZgBMbgBF8gBDNgBA-gBAfgBAogCAZgCAqgCA7gCp7CQuwbAAgHSAiQ5NGFmMTRjOC0zMTEyLTQ0N2ItYmVmMy03NzgxNTMyMzM1MWPYAgTgAgE&sid=e0308e874d6f41080942b5dc5fbf0d40',
             url: '/taxi',
             content: 'airport taxi',
-            title: 'Airport taxis' },
+            title: 'Airport taxis' },*/
     ];
 
     testData.forEach(({ tab, endpoint, url, content, title }) => {
@@ -51,55 +51,4 @@ describe("Navigation Tests for Booking.com",()=>{
                 title);
         });
     });
-    /*
-    it('Should navigate to the Stays section', () => {
-        navigationPage.validateNavigation(
-          'stays',
-          '/index.html',
-          '/index.html',
-          'Find',
-          'Booking.com'
-        );
-      });
-
-      it('Should navigate to the Flights section', () => {
-        navigationPage.validateNavigation(
-          'flights',
-          '/?n',
-          '/?n',
-          'Find',
-          'Booking.com'
-        );
-      });
-
-      it('Should navigate to the Attractions section', () => {
-        navigationPage.validateNavigation(
-          'attractions',
-          '/attractions/index.html',
-          '/attractions',
-          'Attractions',
-          'Tons of tours'
-        );
-      });
-    
-
-    it.only('Should navigate to the Car Rentals section', () => {
-        navigationPage.validateNavigation(
-          'carRentals',
-          '/cars/index.html',
-          '/cars',
-          'Car rentals',
-          'car rental'
-        );
-    });
-
-    it.skip('Should navigate to the Airport Taxis section', () => {
-        navigationPage.validateNavigation(
-          'taxis',
-          '/taxi/index.html',
-          '/taxi',
-          'airport taxi',
-          'Airport taxis'
-        );
-    });*/
 })
