@@ -9,30 +9,7 @@ describe("Navigation Tests for Booking.com",()=>{
     });
 
     const testData = [
-        { 
-            tab: 'stays',
-            endpoint: '/index.html',
-            url: '/index.html',
-            content: 'Find',
-            title: 'Booking.com' },
-        { 
-            tab: 'flights',
-            endpoint: '/?n',
-            url: '/?n',
-            content: 'Find',
-            title: 'Booking.com' },
-        { 
-            tab: 'attractions',
-            endpoint: '/attractions/index.html',
-            url: '/attractions',
-            content: 'Attractions',
-            title: 'Tons of tours' },
-        { 
-            tab: 'carRentals',
-            endpoint: '/cars/index.html',
-            url: '/cars',
-            content: 'Car rentals',
-            title: 'car rental' },
+        
         /* Test for taxis is commented out because the API endpoint is currently unavailable */
         /*{ 
             tab: 'taxis',
@@ -42,14 +19,17 @@ describe("Navigation Tests for Booking.com",()=>{
             title: 'Airport taxis' },*/
     ];
 
-    testData.forEach(({ tab, endpoint, url, content, title }) => {
-        it(`Should navigate to the ${tab} section`,{ defaultCommandTimeout:15000 }, () => {
-            navigationPage.validateNavigation(
-                tab,
-                endpoint,
-                url,
-                content,
-                title);
+    it('Should navigate through all sections', function () {
+        cy.fixture('navigation.json').then((testData) => {
+            testData.forEach(({ tab, endpoint, url, content, title }) => {
+                navigationPage.validateNavigation(
+                    tab,
+                    endpoint,
+                    url,
+                    content,
+                    title
+                );
+            });
         });
     });
 })

@@ -1,0 +1,30 @@
+[
+    {
+      "tab": "stays",
+      "endpoint": "/index.html",
+      "url": "/index.html",
+      "content": "Find",
+      "title": "Booking.com"
+    },
+    {
+      "tab": "flights",
+      "endpoint": "/?n",
+      "url": "/?n",
+      "content": "Find",
+      "title": "Booking.com"
+    },
+    {
+      "tab": "attractions",
+      "endpoint": "/attractions/index.html",
+      "url": "/attractions",
+      "content": "Attractions",
+      "title": "Tons of tours"
+    },
+    {
+      "tab": "carRentals",
+      "endpoint": "/cars/index.html",
+      "url": "/cars",
+      "content": "Car rentals",
+      "title": "car rental"
+    }
+  ]
