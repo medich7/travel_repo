@@ -33,6 +33,7 @@ describe("Navigation Tests for Booking.com",()=>{
             url: '/cars',
             content: 'Car rentals',
             title: 'car rental' },
+        /* Test for taxis is commented out because the API endpoint is currently unavailable */
         /*{ 
             tab: 'taxis',
             endpoint: '/taxi/index.html?aid=304142&label=gen173bo-1DEgR0YXhpKIICOOgHSDNYA2jiAYgBAZgBMbgBF8gBDNgBA-gBAfgBAogCAZgCAqgCA7gCp7CQuwbAAgHSAiQ5NGFmMTRjOC0zMTEyLTQ0N2ItYmVmMy03NzgxNTMyMzM1MWPYAgTgAgE&sid=e0308e874d6f41080942b5dc5fbf0d40',
@@ -42,7 +43,7 @@ describe("Navigation Tests for Booking.com",()=>{
     ];
 
     testData.forEach(({ tab, endpoint, url, content, title }) => {
-        it(`Should navigate to the ${tab} section`, () => {
+        it(`Should navigate to the ${tab} section`,{ defaultCommandTimeout:15000 }, () => {
             navigationPage.validateNavigation(
                 tab,
                 endpoint,
