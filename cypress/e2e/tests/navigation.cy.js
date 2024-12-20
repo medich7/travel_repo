@@ -9,9 +9,16 @@ describe("Navigation Tests for Booking.com",()=>{
     });
 
     const testData = [
-        
-        /* Test for taxis is commented out because the API endpoint is currently unavailable */
-        /*{ 
+         /* Test for taxis is commented out because the API endpoint is currently unavailable 
+        {
+            "tab": "flights",
+            "endpoint": "/?n",
+            "url": "/?n",
+            "content": "Find",
+            "title": "Booking.com"
+          },*/
+        /* Test for taxis is commented out because the API endpoint is currently unavailable 
+        { 
             tab: 'taxis',
             endpoint: '/taxi/index.html?aid=304142&label=gen173bo-1DEgR0YXhpKIICOOgHSDNYA2jiAYgBAZgBMbgBF8gBDNgBA-gBAfgBAogCAZgCAqgCA7gCp7CQuwbAAgHSAiQ5NGFmMTRjOC0zMTEyLTQ0N2ItYmVmMy03NzgxNTMyMzM1MWPYAgTgAgE&sid=e0308e874d6f41080942b5dc5fbf0d40',
             url: '/taxi',
