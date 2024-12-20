@@ -35,10 +35,7 @@ if (app && app.document) {
             cy.get('.ffd93a9ecb > .abcc616ec7 > .a83ed08757').then((closebtn)=>{
                 cy.wrap(closebtn).click();
             });
-        })
-        .catch(()=>{
-            cy.log(`Popup not found; proceeding without closing`)
-        })
+        });
     });
 
 //
