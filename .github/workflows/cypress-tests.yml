@@ -30,3 +30,17 @@ jobs:
         run: npx cypress run
         env:
           CYPRESS_BASE_URL: "https://www.booking.com"
+      
+      #step 5: take screenshots
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      #step 6: upload videos
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
