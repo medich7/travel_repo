@@ -3,7 +3,7 @@ name: Cypress Tests
 on:
   push:
     branches:
-      - main
+      - ci-first-commit
   pull_request:
 
 jobs:
