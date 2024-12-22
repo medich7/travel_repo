@@ -6,7 +6,8 @@
     "cypress": "^13.17.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-runner":"cypress open",
+    "cypress-cloud":"npx cypress run --record --key fae927d6-ba9d-4e1c-8a51-0f4097d2ce59",
     "chromeWebSecurity": false,
     "experimentalSessionAndOrigin": true,
     "watchForFileChanges": false
