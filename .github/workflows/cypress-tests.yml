@@ -45,6 +45,6 @@ jobs:
           name: cypress-videos
           path: cypress/videos
 
-      #step 7: verify screenshot folder exists
+      #step 7: Verify screenshot folder exists
       - name: Verify screenshots directory exists
          run: ls -la cypress/screenshots
