@@ -49,13 +49,3 @@ if (app && app.document) {
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-Cypress.Commands.overwrite('intercept', (originalFn, ...args) => {
-    // Call the original intercept function
-    const result = originalFn(...args);
-  
-    // Suppress logs for certain intercepts
-    if (args[1]?.includes('/api')) {
-      result.log = false; // Prevent showing this intercept in logs
-    }
-    return result;
-  });
