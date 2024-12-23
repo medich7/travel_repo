@@ -32,6 +32,8 @@ class NavigationPage {
 
     // Helper function for Validating navigation
     validateNavigation(tab, endpoint, url, content, title) {
+
+        Cypress.Cookies.debug(true);
         cy.intercept('GET', endpoint).as(`get${tab}`);
         this.clickTab(`${tab}Tab`,{force:true});
         //cy.wait(`@get${tab}`).its('response.statusCode').should('eq', 200);
