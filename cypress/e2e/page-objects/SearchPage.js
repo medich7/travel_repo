@@ -57,14 +57,21 @@ class SearchPage {
   
     configureGuests(adults, children, rooms) {
       this.guestsButton().click();
+      cy.get(':nth-child(1) > .bfb38641b0 > .d723d73d5f').invoke('text', '0');
+      cy.get(':nth-child(2) > .bfb38641b0 > .d723d73d5f').invoke('text', '0');
+      cy.get(':nth-child(3) > .bfb38641b0 > .d723d73d5f').invoke('text', '0');
       for (let i = 0; i < adults; i++) this.addAdultGuest().click();
-      for (let i = 0; i < children; i++) this.addChildGuest().click().then(() =>{
+      for (let k = 0; k < children; k++){
+        this.addChildGuest().click()
         if(children>0){
-            this.addChildAge('4 years old')
-          }
-      });
+            this.addChildAge('4 years old');
+            for (let j = 0; j < rooms; j++) this.addRoom().click();
+        }else{
+            for (let j = 0; j < rooms; j++) this.addRoom().click();
+        }
+      } 
       
-      for (let i = 0; i < rooms; i++) this.addRoom().click();
+      
     }
   
     clickSearchButton() {

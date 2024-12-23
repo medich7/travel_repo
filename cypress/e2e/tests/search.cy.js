@@ -26,11 +26,13 @@ describe("Search Functionality Tests for Booking.com", () => {
   });
 
   it('Should display an error when searching without a destination', () => {
-    searchPage.selectCheckInDate('15');
-    searchPage.selectCheckOutDate('20');
+    searchPage.selectCheckInDate('2024-12-15');
+    searchPage.selectCheckOutDate('2024-12-30');
+    searchPage.configureGuests(2, 0, 1);
+    searchPage.clickDoneButton();
     searchPage.clickSearchButton();
 
-    cy.contains('Please specify your destination').should('be.visible');
+    cy.contains('Enter a destination').should('be.visible');
   });
 
   it('Should validate invalid date ranges', () => {
