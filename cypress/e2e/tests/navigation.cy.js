@@ -19,7 +19,7 @@ describe("Navigation Tests for Booking.com",()=>{
         { 
             tab: 'flights',
             endpoint: '/?n',
-            url: '/?n',
+            url: '/flights/index.html',
             content: 'Find',
             title: 'Booking.com' },
         { 
