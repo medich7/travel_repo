@@ -25,7 +25,9 @@ describe("",()=>{
         cy.get('[data-testid="searchbox-form-button-icon"]').click();
         cy.get(':nth-child(1) > .bfb38641b0 > .f4d78af12a').click();
         cy.get(':nth-child(2) > .bfb38641b0 > .f4d78af12a').click();
-        cy.get('[name="age"]').should('be.visible').select('4 years old');
+        cy.get(':nth-child(2) > .bfb38641b0 > .f4d78af12a').click();
+        cy.get('[name="age"]').eq(0).should('be.visible').select('4 years old');
+        cy.get('[name="age"]').eq(1).should('be.visible').select('5 years old');
         cy.get(':nth-child(5) > .bfb38641b0 > .f4d78af12a').click();
 
         cy.get('.bf0537ecb5')

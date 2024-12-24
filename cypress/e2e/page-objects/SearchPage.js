@@ -24,8 +24,8 @@ class SearchPage {
       return cy.get(':nth-child(2) > .bfb38641b0 > .f4d78af12a'); // Add child guest button
     }
 
-    addChildAge(age){
-        return cy.get('[name="age"]').should('be.visible').select(age);
+    addChildAge(age,child_rank){
+        return cy.get('[name="age"]').eq(child_rank).should('be.visible').select(age);
     }
   
     addRoom() {
@@ -64,7 +64,9 @@ class SearchPage {
       for (let k = 0; k < children; k++){
         this.addChildGuest().click()
         if(children>0){
-            this.addChildAge('4 years old');
+          const randomAge = Math.floor((Math.random() * 16) + 2); 
+
+            this.addChildAge(`${randomAge} years old`, k);
             for (let j = 0; j < rooms; j++) this.addRoom().click();
         }else{
             for (let j = 0; j < rooms; j++) this.addRoom().click();

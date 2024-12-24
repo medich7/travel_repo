@@ -13,7 +13,7 @@ describe("Search Functionality Tests for Booking.com", () => {
     });
   
 
-  it.only('Should search with a valid destination', () => {
+  it('Should search with a valid destination', () => {
     searchPage.enterDestination('Paris');
     searchPage.selectCheckInDate('2024-12-15');
     searchPage.selectCheckOutDate('2024-12-30');
@@ -44,10 +44,10 @@ describe("Search Functionality Tests for Booking.com", () => {
     cy.contains('Please check the dates you have entered').should('be.visible');
   });
 
-  it('Should search with maximum guests and rooms', () => {
+  it.only('Should search with maximum guests and rooms', () => {
     searchPage.enterDestination('New York');
-    searchPage.selectCheckInDate('10');
-    searchPage.selectCheckOutDate('15');
+    searchPage.selectCheckInDate('2024-12-15');
+    searchPage.selectCheckOutDate('2024-12-30');
     searchPage.configureGuests(5, 3, 3); // Example maximum
     searchPage.clickSearchButton();
 
