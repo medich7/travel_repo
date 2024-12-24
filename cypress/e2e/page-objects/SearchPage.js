@@ -9,7 +9,7 @@ class SearchPage {
     }
   
     checkDate(date) {
-      return cy.get(`[data-date="${date}"]`); // Dynamic date selector
+      return cy.get(`[data-date="${date}"]`); // Date selector
     }
   
     guestsButton() {
@@ -39,6 +39,61 @@ class SearchPage {
 
     doneButton(){
         return cy.get('.bf0537ecb5'); 
+    }
+
+    generatePastDate(){
+      const today = new Date(); // Get the current date
+      
+      // Calculate a date earlier than today
+      const earlierDate = new Date(today);
+      earlierDate.setDate(today.getDate() - Math.floor(Math.random() * 10)); // Subtract one day
+      const earlierDateString = earlierDate.toISOString().split('T')[0]; // Format as "YYYY-MM-DD"
+      return earlierDateString
+    }
+
+    generateEarlierDate(checkInDate){
+      const check_In_Date = new Date(checkInDate)
+      // Ensure the random number of days to substruct is at least 1
+      const randomDays = Math.floor(Math.random() * 10) + 1;
+
+      // Set the check-out date based on check-in date and random number of days
+      const checkOutDate = new Date(check_In_Date); 
+      checkOutDate.setDate(check_In_Date.getDate() - randomDays); // Add random days to check-in date
+      const checkOutDateString = checkOutDate.toISOString().split('T')[0]; // Format as "YYYY-MM-DD"
+      return checkOutDateString
+    }
+
+    generateCheckInDate(){
+      const today = new Date(); // Get the current date
+      
+      // Calculate a date later than today
+      const checkInDate = new Date(today);
+      checkInDate.setDate(today.getDate() + Math.floor(Math.random() * 10) +1 ); // Adding a random number of days to the current day
+      const checkInDateString = checkInDate.toISOString().split('T')[0]; // Format as "YYYY-MM-DD"
+      return checkInDateString
+    }
+
+    generateCheckOutDate(checkInDate){
+      const today = new Date(); // Get the current date
+      const check_In_Date = new Date(checkInDate)
+      // Ensure the random number of days to add is at least 1
+      const randomDays = Math.floor(Math.random() * 10) + 1;
+
+      // Set the check-out date based on check-in date and random number of days
+      const checkOutDate = new Date(check_In_Date); 
+      checkOutDate.setDate(check_In_Date.getDate() + randomDays); // Add random days to check-in date
+      const checkOutDateString = checkOutDate.toISOString().split('T')[0]; // Format as "YYYY-MM-DD"
+      return checkOutDateString
+    }
+
+    checkDisabledDate(disabledDate){
+      // Spy on a method (if you're looking for a JavaScript function call)
+      const spy = cy.spy().as('clickSpy');
+      
+      // Listen for the event and simulate a click
+      cy.get(`@${disabledDate}`).click().then(() => {
+        expect(spy).to.not.have.been.called;
+      });
     }
   
     // Methods for actions

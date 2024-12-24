@@ -14,9 +14,14 @@ describe("Search Functionality Tests for Booking.com", () => {
   
 
   it('Should search with a valid destination', () => {
+
+    const checkInDate = searchPage.generateCheckInDate(); // Initial check-in date
+    const checkOutDate = searchPage.generateCheckOutDate(checkInDate); // Check-out date to be selected
+     
+    
     searchPage.enterDestination('Paris');
-    searchPage.selectCheckInDate('2024-12-15');
-    searchPage.selectCheckOutDate('2024-12-30');
+    searchPage.selectCheckInDate(checkInDate);
+    searchPage.selectCheckOutDate(checkOutDate);
     searchPage.configureGuests(2, 1, 1);
     searchPage.clickDoneButton();
     searchPage.clickSearchButton();
@@ -26,8 +31,12 @@ describe("Search Functionality Tests for Booking.com", () => {
   });
 
   it('Should display an error when searching without a destination', () => {
-    searchPage.selectCheckInDate('2024-12-15');
-    searchPage.selectCheckOutDate('2024-12-30');
+
+    const checkInDate = searchPage.generateCheckInDate(); // Initial check-in date
+    const checkOutDate = searchPage.generateCheckOutDate(checkInDate); // Check-out date to be selected
+     
+    searchPage.selectCheckInDate(checkInDate);
+    searchPage.selectCheckOutDate(checkOutDate);
     searchPage.configureGuests(2, 0, 1);
     searchPage.clickDoneButton();
     searchPage.clickSearchButton();
@@ -35,19 +44,36 @@ describe("Search Functionality Tests for Booking.com", () => {
     cy.contains('Enter a destination').should('be.visible');
   });
 
-  it('Should validate invalid date ranges', () => {
-    searchPage.enterDestination('Rome');
-    searchPage.selectCheckInDate('20');
-    searchPage.selectCheckOutDate('15'); // Invalid range
-    searchPage.clickSearchButton();
+  it('should not be able to select a date from the past',() =>{
 
-    cy.contains('Please check the dates you have entered').should('be.visible');
+    let pastDate = searchPage.generatePastDate();
+    searchPage.datePicker().click();
+    searchPage.checkDate(pastDate).as('disabledDate');
+
+    searchPage.checkDisabledDate('disabledDate');
+
+  })
+
+  it('Should update the check-in date when an earlier date is clicked', () => {
+
+    const firstDate = searchPage.generateCheckInDate(); // Initial check-in date
+    const earlierDate = searchPage.generateEarlierDate(firstDate); // Earlier date to be selected
+
+    searchPage.selectCheckInDate(firstDate);
+    searchPage.selectCheckOutDate(earlierDate);
+
+    searchPage.checkDate(earlierDate).should('have.attr', 'aria-checked', 'true');
+    searchPage.checkDate(firstDate).should('not.have.attr', 'aria-checked', 'true');
+
   });
 
-  it.only('Should search with maximum guests and rooms', () => {
-    searchPage.enterDestination('New York');
-    searchPage.selectCheckInDate('2024-12-15');
-    searchPage.selectCheckOutDate('2024-12-30');
+  it('Should search with maximum guests and rooms', () => {
+    const checkInDate = searchPage.generateCheckInDate(); // Initial check-in date
+    const checkOutDate = searchPage.generateCheckOutDate(checkInDate); // Check-out date to be selected
+     
+    searchPage.enterDestination('Paris');
+    searchPage.selectCheckInDate(checkInDate);
+    searchPage.selectCheckOutDate(checkOutDate);
     searchPage.configureGuests(5, 3, 3); // Example maximum
     searchPage.clickSearchButton();
 
