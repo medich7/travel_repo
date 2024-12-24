@@ -44,7 +44,7 @@ describe("Search Functionality Tests for Booking.com", () => {
     cy.contains('Enter a destination').should('be.visible');
   });
 
-  it('should not be able to select a date from the past',() =>{
+  it('Should not be able to select a date from the past',() =>{
 
     let pastDate = searchPage.generatePastDate();
     searchPage.datePicker().click();
