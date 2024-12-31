@@ -1,0 +1,21 @@
+{
+    "validSearch": {
+      "destination": "Paris",
+      "adults": 2,
+      "children": 1,
+      "rooms": 1
+    },
+    "maxGuestsSearch": {
+      "destination": "Paris",
+      "adults": 5,
+      "children": 3,
+      "rooms": 3
+    },
+    "emptyDestinationSearch": {
+      "destination": " ",
+      "adults": 2,
+      "children": 0,
+      "rooms": 1,
+      "error": "Enter a destination"
+    }
+}

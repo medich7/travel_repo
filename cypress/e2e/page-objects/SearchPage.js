@@ -9,11 +9,11 @@ class SearchPage {
     }
   
     checkDate(date) {
-      return cy.get(`[data-date="${date}"]`); // Date selector
+      return cy.get(`[data-date="${date}"]`); // Selector for specific dates in YYYY-MM-DD format
     }
   
     guestsButton() {
-      return cy.get('[data-testid="searchbox-form-button-icon"]'); // Guests/rooms button
+      return cy.get('[data-testid="searchbox-form-button-icon"]'); // Button to open guests/rooms selector
     }
   
     addAdultGuest() {
@@ -24,8 +24,9 @@ class SearchPage {
       return cy.get(':nth-child(2) > .bfb38641b0 > .f4d78af12a'); // Add child guest button
     }
 
-    addChildAge(age,child_rank){
-        return cy.get('[name="age"]').eq(child_rank).should('be.visible').select(age);
+    addChildAge(age,childIndex){
+        // Select child age dynamically based on child index
+        return cy.get('[name="age"]').eq(childIndex).should('be.visible').select(age);
     }
   
     addRoom() {
@@ -33,14 +34,18 @@ class SearchPage {
     }
   
     searchButton() {
-        return cy.get('.d12ff5f5bf > .a83ed08757'); // Search button
+        return cy.get('.d12ff5f5bf > .a83ed08757'); // Button to submit the search form
       
     }
 
     doneButton(){
-        return cy.get('.bf0537ecb5'); 
+        return cy.get('.bf0537ecb5');  // Button to finalize guest/room configuration
     }
 
+    /*
+    * Generate a random date in the past.
+    * @returns {string} A formatted date string (YYYY-MM-DD)
+    */
     generatePastDate(){
       const today = new Date(); // Get the current date
       
@@ -51,6 +56,11 @@ class SearchPage {
       return earlierDateString
     }
 
+    /*
+    * Generate a random check-out date earlier than the check-in date.
+    * @param {string} checkInDate - The check-in date in YYYY-MM-DD format
+    * @returns {string} A formatted date string (YYYY-MM-DD)
+    */
     generateEarlierDate(checkInDate){
       const check_In_Date = new Date(checkInDate)
       // Ensure the random number of days to substruct is at least 1
@@ -62,7 +72,10 @@ class SearchPage {
       const checkOutDateString = checkOutDate.toISOString().split('T')[0]; // Format as "YYYY-MM-DD"
       return checkOutDateString
     }
-
+    /*
+     * Generate a random check-in date later than the current date.
+     * @returns {string} A formatted date string (YYYY-MM-DD)
+     */
     generateCheckInDate(){
       const today = new Date(); // Get the current date
       
@@ -73,6 +86,11 @@ class SearchPage {
       return checkInDateString
     }
 
+    /*
+    * Generate a random check-out date based on the check-in date.
+    * @param {string} checkInDate - The check-in date in YYYY-MM-DD format
+    * @returns {string} A formatted date string (YYYY-MM-DD)
+    */
     generateCheckOutDate(checkInDate){
       const today = new Date(); // Get the current date
       const check_In_Date = new Date(checkInDate)
@@ -86,6 +104,10 @@ class SearchPage {
       return checkOutDateString
     }
 
+    /*
+    * Validate that a date is disabled for selection.
+    * @param {string} date - The date to validate in YYYY-MM-DD format
+    */
     checkDisabledDate(disabledDate){
       // Spy on a method (if you're looking for a JavaScript function call)
       const spy = cy.spy().as('clickSpy');
@@ -96,20 +118,36 @@ class SearchPage {
       });
     }
   
-    // Methods for actions
+    /*
+    * Enter the destination in the search form.
+    * @param {string} destination - The name of the destination
+    */
     enterDestination(destination) {
       this.destinationInput().clear().type(destination);
     }
-  
+    
+    /*
+    * Select a check-in date.
+    * @param {string} date - The check-in date in YYYY-MM-DD format
+    */
     selectCheckInDate(date) {
       this.datePicker().click();
       this.checkDate(date).click();
     }
-  
+    
+    /*
+    * Select a check-out date.
+    * @param {string} date - The check-out date in YYYY-MM-DD format
+    */
     selectCheckOutDate(date) {
       this.checkDate(date).click();
     }
-  
+    /*
+    * Configure the number of guests and rooms for the search.
+    * @param {number} adults - Number of adult guests
+    * @param {number} children - Number of child guests
+    * @param {number} rooms - Number of rooms
+    */
     configureGuests(adults, children, rooms) {
       this.guestsButton().click();
       cy.get(':nth-child(1) > .bfb38641b0 > .d723d73d5f').invoke('text', '0');
@@ -130,11 +168,15 @@ class SearchPage {
       
       
     }
-  
+    /**
+    * Click the search button to submit the form.
+    */
     clickSearchButton() {
       this.searchButton().click();
     }
-
+    /*
+     * Click the "Done" button to close the guest/room configuration.
+     */
     clickDoneButton(){
         this.doneButton().click();
     }

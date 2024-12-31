@@ -8,6 +8,8 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 //
+
+import { searchPage } from "../e2e/page-objects/SearchPage";
 // Suppress intercept commands from showing in the command log
 const app = window.top;
 if (app && app.document) {
@@ -25,9 +27,9 @@ if (app && app.document) {
 // Cypress.Commands.add('login', (email, password) => { ... })
 
 
-        /*Command to close the popup window before each test
-        Since the popup window take time to appear, to avoid sychronous execution of cypress 
-        we use .then() to implement the asynchronous behavior*/
+  /*Command to close the popup window before each test
+  Since the popup window take time to appear, to avoid sychronous execution of cypress 
+  we use .then() to implement the asynchronous behavior*/
     Cypress.Commands.add('closePopup', () => {
         cy.get('.dd5dccd82f', { timeout: 10000 })
         .should('be.visible')
@@ -36,6 +38,19 @@ if (app && app.document) {
                 cy.wrap(closebtn).click();
             });
         });
+    });
+
+/* command for implementing the whole search flow in one call*/
+
+    Cypress.Commands.add('setupSearch', (destination, checkInDate, checkOutDate, adults, children, rooms) => {
+      
+      searchPage.enterDestination(destination);
+      searchPage.selectCheckInDate(checkInDate);
+      searchPage.selectCheckOutDate(checkOutDate);
+      searchPage.configureGuests(adults, children, rooms);
+      searchPage.clickDoneButton();
+      searchPage.clickSearchButton();
+
     });
 
 //
